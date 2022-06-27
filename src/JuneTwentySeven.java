@@ -68,4 +68,28 @@ public class JuneTwentySeven {
         temp.next = temp.next.next;
         return head;
     }
+
+    /**
+     * 特殊场景 "]" "["
+     * @param s
+     * @return
+     */
+    public boolean isValid(String s) {
+        Stack<Character> characters = new Stack<>();
+        char[] array = s.toCharArray();
+        for (char ch : array) {
+            if (ch == '(') {
+                characters.push(')');
+            } else if (ch == '[') {
+                characters.push(']');
+            } else if (ch == '{') {
+                characters.push('}');
+            } else {
+                if (characters.empty()) return false;
+                char temp = characters.pop();
+                if (temp != ch) return false;
+            }
+        }
+        return characters.empty();
+    }
 }
