@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JuneTwentySeven {
     public List<String> letterCombinations(String digits) {
@@ -31,9 +28,44 @@ public class JuneTwentySeven {
             int lettersCount = letters.length();
             for (int i = 0; i < lettersCount; i++) {
                 combination.append(letters.charAt(i));
-                part(result, phoneMap, digits, index+1, combination);
+                part(result, phoneMap, digits, index + 1, combination);
                 combination.deleteCharAt(index);
             }
         }
+    }
+
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {
+        }
+        ListNode(int val) {
+            this.val = val;
+        }
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        Queue<ListNode> queue = new LinkedList<>();
+        ListNode temp = head;
+        while (temp != null) {
+            if (queue.size() == n+1) {
+                queue.poll();
+            }
+            queue.add(temp);
+            temp = temp.next;
+        }
+        if (queue.size() < n) {
+            return head;
+        }
+        if (queue.size() == n) {
+            return head.next;
+        }
+        temp = queue.poll();
+        temp.next = temp.next.next;
+        return head;
     }
 }
