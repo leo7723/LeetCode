@@ -26,4 +26,33 @@ public class JulyTenth {
             used[i] = false;
         }
     }
+
+    /**
+     * 第一行变成倒数第一列
+     * matrix[row][col] = matrix[col][n - row - 1]
+     *
+     * @param matrix
+     */
+    public void rotate(int[][] matrix) {
+        if (matrix.length == 0 || matrix.length != matrix[0].length) {
+            return;
+        }
+
+        int nums = matrix.length;
+        for (int i = 0; i < nums/2; i++) {
+            for (int j = 0; j < nums; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[nums-i-1][j];
+                matrix[nums-i-1][j] = temp;
+            }
+        }
+
+        for (int i = 0; i < nums; i++) {
+            for (int j = 0; j < i; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
 }
